@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import model.HibernateUtil;
 import model.Student;
 
 public class StudentDao {
@@ -35,7 +34,7 @@ public class StudentDao {
         s.close();
         return "Student deleted";
     }
-    public Student findByid(String id){
+    public Student findByid(int id){
         Session s = HibernateUtil.getSessionFactory().openSession();
         Student st = (Student) s.get(Student.class, id);
         s.close();
@@ -44,7 +43,7 @@ public class StudentDao {
     
     public List<Student> findAll(){
         Session s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createQuery("from Student where id=1");
+        Query q = s.createQuery("from Student");
         List<Student> li = q.list();
         s.close();
         return li;
